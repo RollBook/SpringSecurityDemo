@@ -25,7 +25,7 @@ public class ResponseResult<T> {
         this.data = data;
     }
 
-    public ResponseResult(Integer code, T data, String msg) {
+    public ResponseResult(Integer code,  String msg, T data) {
         this.msg = msg;
         this.code = code;
         this.data = data;
