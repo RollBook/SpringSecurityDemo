@@ -31,4 +31,13 @@ public class LoginController {
         return new ResponseResult<>(200,"登录成功",map);
     }
 
+    @PostMapping("/user/logout")
+    public ResponseResult logout() {
+
+        // 退出登录
+        loginService.logout();
+
+        return new ResponseResult<>(200,"注销成功");
+    }
+
 }

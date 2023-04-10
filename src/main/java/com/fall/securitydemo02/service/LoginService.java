@@ -4,4 +4,6 @@ import com.fall.securitydemo02.domain.User;
 
 public interface LoginService {
     String login(User user);
+
+    void logout();
 }

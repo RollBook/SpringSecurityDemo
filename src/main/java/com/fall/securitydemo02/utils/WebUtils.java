@@ -9,9 +9,9 @@ import java.io.IOException;
  */
 public class WebUtils {
 
-    public static void renderingString(HttpServletResponse response,String string) {
+    public static void renderingString(HttpServletResponse response,String string,Integer status) {
         try {
-            response.setStatus(200);
+            response.setStatus(status);
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
             response.getWriter().println(string);
