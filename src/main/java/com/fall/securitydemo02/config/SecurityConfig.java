@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 //@EnableWebSecurity // 此注解用于替代已经废弃的WebSecurityConfigurationAdapter接口
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -47,6 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // 直接放行登录接口，允许匿名访问
                 .antMatchers("/user/login").anonymous()
+                // 允许所有人访问
+                // .antMatchers("/hello").permitAll()
                 // 除antMatchers里接口外全部需要鉴权
                 .anyRequest().authenticated();
 

@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
 
 /**
@@ -19,8 +21,12 @@ import java.util.Objects;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    private final UserMapper userMapper;
+
     @Autowired
-    private UserMapper userMapper;
+    public UserDetailsServiceImpl(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -33,11 +39,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new RuntimeException("用户名或密码错误la");
         }
 
-        // TODO 2. 查询对应的权限信息
+        // 2. 查询对应的权限信息
+        HashSet<String> list = new HashSet<>(Arrays.asList("test", "admin"));
 
         // 把数据封装成UserDetails返回
 
 
-        return new LoginUser(user);
+        return new LoginUser(user,list);
     }
 }
